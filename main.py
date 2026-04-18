@@ -10,7 +10,7 @@ from src.metrics import rmse, mae
 
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(root, "data", "btc_kaggle.csv")
+    csv_path = os.path.join(root, "data", "raw", "btc_kaggle.csv")
 
     # 1) Load
     df = load_data(csv_path)
