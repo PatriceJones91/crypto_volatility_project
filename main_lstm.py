@@ -29,10 +29,11 @@ def print_block(title: str):
 
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
-    data_path = os.path.join(root, "data", "btc_kaggle.csv")
-    results_csv = os.path.join(root, "results_week3_lstm.csv")
-    loss_png = os.path.join(root, "week3_lstm_loss.png")
-
+    data_path = os.path.join(root, "data", "raw", "btc_kaggle.csv")
+    results_csv = os.path.join(root, "outputs", "exports", "results_week3_lstm.csv")
+    loss_png = os.path.join(root, "outputs", "charts", "week3_lstm_loss.png")
+    metrics_csv = os.path.join(root, "outputs", "tables", "metrics_week3.csv")
+    
     # Settings
     VOL_WINDOW = 14
     EWMA_LAMBDA = 0.94
