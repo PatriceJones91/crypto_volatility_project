@@ -57,7 +57,7 @@ def main():
         "pred_ewma": pred_ewma,
         "pred_rf": pred_rf
     })
-    out_path = os.path.join(root, "results_week2.csv")
+    out_path = os.path.join(root, "outputs", "exports", "results_week2.csv")
     results.to_csv(out_path, index=False)
     print("\nSaved:", out_path)
 
