@@ -5,7 +5,7 @@ from src.preprocessing import (
     load_data, add_returns, add_realized_volatility, add_ewma_volatility, add_target
 )
 from src.baseline_models import baseline_hist_vol, baseline_ewma_vol
-from src.ml_models import build_features, train_random_forest
+from src.rf_model import build_features, train_random_forest
 from src.metrics import rmse, mae
 
 def main():
