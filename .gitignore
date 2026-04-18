@@ -1,0 +1,40 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / editor files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Build / package files
+build/
+dist/
+*.egg-info/
+
+# Local cache
+.cache/
+.pytest_cache/
+
+# Office temp files
+~$*.docx
+~$*.pdf
+~$*.pptx
+
+# Temp files
+*.tmp
