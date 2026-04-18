@@ -1,5 +1,8 @@
-def summarize_results(results_df):
+import pandas as pd
+
+
+def summarize_results(results_df: pd.DataFrame) -> pd.DataFrame:
     """
-    Placeholder for dashboard summary logic.
+    Placeholder dashboard summary logic.
     """
     return results_df
