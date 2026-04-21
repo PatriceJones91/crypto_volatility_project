@@ -39,7 +39,6 @@ def main():
     df = add_target(df)
 
     # 3) Optional context integration
-    # Replace None with a real context DataFrame later if you add one
     df = merge_context_features(df, context_df=None)
 
     # 4) Feature build
