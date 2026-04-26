@@ -1,122 +1,54 @@
 # Predictive Modeling for Bitcoin Volatility Forecasting
 
 ## Overview
-This project develops and evaluates a Bitcoin volatility forecasting pipeline using both traditional machine learning and deep learning approaches. The system is designed to support short-horizon risk analysis by transforming historical Bitcoin market data into volatility-focused features and comparing multiple forecasting strategies under a chronological evaluation framework.
+
+This project develops a reproducible Bitcoin volatility forecasting framework for short-horizon risk analysis. The goal is not to predict exact future Bitcoin prices, create a trading bot, or provide investment advice. Instead, the project focuses on forecasting Bitcoin volatility and comparing how different modeling strategies perform under a time-ordered evaluation process.
+
+The current direction of the project centers on comparing a static forecasting model with a periodically refreshed forecasting model. This is important because cryptocurrency markets change over time. A model trained once may perform well during one market period but become less reliable as volatility patterns shift. A periodically refreshed model allows the forecasting process to update with newer data so the project can evaluate whether model refresh strategies improve short-term volatility prediction.
 
 The project includes two main workflows:
 
-- `main.py` for baseline methods and Random Forest forecasting
+- `main.py` for baseline volatility methods and Random Forest forecasting
 - `main_lstm.py` for sequence-based LSTM forecasting
 
-The goal is not simply to apply more advanced models, but to test whether increased model complexity improves predictive performance relative to strong volatility baselines. This creates a more defensible and realistic forecasting framework for academic analysis and model comparison. :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1}
+The purpose of these workflows is to test whether additional model complexity improves forecasting performance compared to simpler volatility baselines.
 
 ## Research Focus
-Bitcoin is known for price instability, volatility clustering, and rapid regime shifts. These characteristics make volatility forecasting a meaningful problem for financial risk assessment and decision support. This project examines whether machine learning and sequence modeling approaches can forecast future Bitcoin volatility more effectively than simpler benchmark methods.
+
+Bitcoin is known for rapid price movement, volatility clustering, and changing market behavior. Because of this, forecasting volatility can be more meaningful than attempting to predict exact future prices. Volatility forecasting supports risk interpretation by estimating how uncertain or unstable future price movement may be over a short horizon.
+
+This project is guided by the following research question:
+
+> How does a periodically refreshed forecasting model compare to a static forecasting model when predicting short-term Bitcoin volatility?
+
+The project examines whether updating a model over time can produce better forecasting performance than relying on a model trained once and evaluated on future data without retraining.
 
 ## Project Objectives
+
 The project is organized around the following objectives:
 
-- build a clean and reproducible volatility forecasting pipeline
-- engineer meaningful features from raw Bitcoin OHLCV market data
-- compare baseline volatility methods against machine learning models
-- evaluate predictive performance using a realistic time-ordered split
-- generate exportable results, metrics tables, and training diagnostics for reporting
+- Build a clean and reproducible Bitcoin volatility forecasting pipeline.
+- Engineer meaningful volatility-focused features from historical Bitcoin OHLCV data.
+- Compare baseline volatility methods against machine learning models.
+- Compare static forecasting behavior against periodically refreshed forecasting behavior.
+- Evaluate model performance using a chronological train-test split.
+- Export results, metrics tables, and diagnostic visuals for academic reporting.
+- Support advisor review, committee discussion, and future capstone development.
+
+## What This Project Is Not
+
+This project is not intended to be:
+
+- A Bitcoin price prediction system.
+- A trading application.
+- A financial advice platform.
+- A guaranteed investment decision tool.
+- A live cryptocurrency buying or selling system.
+
+The project is focused on forecasting, model comparison, evaluation, and risk interpretation.
 
 ## Dataset
+
 The project uses historical Bitcoin market data stored as:
 
-`data/raw/btc_kaggle.csv`
-
-The pipeline expects the dataset to include the following columns:
-
-- `Date`
-- `Open`
-- `High`
-- `Low`
-- `Close`
-- `Volume`
-
-The scripts validate these columns before modeling begins. 
-
-## Modeling Workflows
-
-### 1. Baseline + Random Forest Pipeline (`main.py`)
-This script performs the Week 2 forecasting workflow:
-
-- loads and validates the dataset
-- computes returns
-- computes realized volatility
-- computes EWMA volatility
-- builds a forecasting target
-- optionally merges context-aware features
-- creates the modeling dataset
-- performs a chronological 80/20 train-test split
-- evaluates:
-  - Historical Volatility
-  - EWMA
-  - Random Forest
-- saves prediction outputs and metrics tables
-
-This workflow establishes benchmark performance and tests whether Random Forest improves on traditional volatility estimators. :contentReference[oaicite:3]{index=3}
-
-### 2. LSTM Forecasting Pipeline (`main_lstm.py`)
-This script extends the project with a sequence-learning approach:
-
-- uses the same data loading and preprocessing pipeline
-- standardizes the feature set with `StandardScaler`
-- creates fixed-length sequences for temporal modeling
-- splits training data into training and validation subsets
-- trains an LSTM model
-- evaluates LSTM predictions against the same baseline methods
-- saves prediction outputs, metrics tables, and a loss curve figure
-
-The sequence length is set to 14, meaning the model uses 14 time steps to forecast subsequent volatility behavior. :contentReference[oaicite:4]{index=4}
-
-## Evaluation Strategy
-This project uses a **chronological train-test split** rather than a random split. That design choice is important because volatility forecasting is a time-series problem. The model should learn from past data and be evaluated on future data, not on randomly mixed observations.
-
-Performance is measured using:
-
-- **RMSE (Root Mean Squared Error)**
-- **MAE (Mean Absolute Error)**
-
-These metrics are implemented in `src/metrics.py`, along with a helper function for saving metrics tables. :contentReference[oaicite:5]{index=5}
-
-## Current Model Comparison
-Based on the current pipeline output from `main.py`, the model ranking is:
-
-1. Historical Volatility
-2. Random Forest
-3. EWMA
-
-Example reported results:
-
-| Model | RMSE | MAE |
-|---|---:|---:|
-| Historical Volatility | 0.002478 | 0.001370 |
-| Random Forest | 0.002705 | 0.001747 |
-| EWMA | 0.004779 | 0.003844 |
-
-These results suggest that, in the current configuration, the simple historical volatility baseline remains the strongest performer, while Random Forest improves over EWMA but does not yet surpass the best baseline. This comparison strengthens the analysis because it prevents the project from assuming that higher model complexity automatically produces better forecasting performance. :contentReference[oaicite:6]{index=6}
-
-## Project Structure
-```text
-crypto_project/
-├── data/
-│   └── raw/
-│       └── btc_kaggle.csv
-├── outputs/
-│   ├── charts/
-│   ├── exports/
-│   └── tables/
-├── src/
-│   ├── baseline_models.py
-│   ├── context_features.py
-│   ├── lstm_model.py
-│   ├── metrics.py
-│   ├── preprocessing.py
-│   └── rf_model.py
-├── main.py
-├── main_lstm.py
-├── requirements.txt
-└── README.md
+-data/raw/btc_kaggle.csv
